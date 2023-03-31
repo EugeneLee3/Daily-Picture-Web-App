@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Navbar from './components/Navbar';
 import LayoutLoader from './layouts/LayoutLoader';
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
             <Route path="/" element={ <LayoutLoader /> }>
               <Route index element={ <Home /> } />
               <Route path="sign-in" element={ <Login /> } />
-              <Route path="sign-up" element={ <Register /> } />
+              <Route path="register" element={ <Register /> } />
             </Route>
       
           </Routes>
