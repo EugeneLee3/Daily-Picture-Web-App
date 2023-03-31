@@ -7,7 +7,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB\n'))
   .catch((err) => console.error('Failed to connect to MongoDB\n', err));
 
-const newSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -18,6 +18,6 @@ const newSchema = new mongoose.Schema({
     }
 })
 
-const collection = mongoose.model("collection", newSchema)
+const collection = mongoose.model("Users", userSchema)
 
 module.exports = collection 
