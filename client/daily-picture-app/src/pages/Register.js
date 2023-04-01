@@ -19,7 +19,7 @@ function Register() {
     // Handle form submission herez
     console.log(email, password)
     try {
-      const response = await axios.post('http://localhost:8000/register', { email, password });
+      const response = await axios.post('http://localhost:5000/register', { email, password });
       console.log(response.data);
       // do something based on the response
     } catch (error) {

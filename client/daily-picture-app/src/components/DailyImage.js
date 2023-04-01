@@ -1,11 +1,11 @@
 import { React, useState, useEffect } from 'react';
 import moment from 'moment';
 
+const NASA_API_KEY = process.env.REACT_APP_NASA_API_KEY;
+
 function DailyImage() {
   const [picture, setPicture] = useState(null);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
-
-  const NASA_API_KEY = process.env.REACT_APP_NASA_API_KEY;
 
   useEffect(() => {
     const fetchData = async () => {

@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json()); // enables JSON request bodies
 app.use(cors());
 
-app.post('http://localhost:8000/register', async (req, res) => {
+app.post('http://localhost:5000/register', async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
