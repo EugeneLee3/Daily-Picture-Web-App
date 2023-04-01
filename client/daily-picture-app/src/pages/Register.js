@@ -1,4 +1,6 @@
-import { React, useState } from 'react'
+import { React, useState } from 'react';
+import axios from 'axios';
+
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -15,28 +17,7 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission here
-    fetch('/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log('User created');
-        } else {
-          console.log(email);
-          console.log(password);
-          console.log('Internal Server Error');
-        }
-      })
-      .catch(error => {
-        console.log('Error');
-      });
+    
   };
 
   return (
