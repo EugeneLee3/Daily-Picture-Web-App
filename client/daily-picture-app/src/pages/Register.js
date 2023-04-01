@@ -14,10 +14,18 @@ function Register() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission here
-    
+    // Handle form submission herez
+    console.log(email, password)
+    try {
+      const response = await axios.post('/', { email, password });
+      console.log(response.data);
+      // do something based on the response
+    } catch (error) {
+      console.error(error);
+      // handle error
+    }
   };
 
   return (

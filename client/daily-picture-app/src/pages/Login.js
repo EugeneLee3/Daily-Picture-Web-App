@@ -1,5 +1,5 @@
-import { React, useState } from 'react'
-
+import { React, useState } from 'react';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -18,8 +18,7 @@ function Login() {
     // Handle form submission here
     console.log(email)
     console.log(password)
-    setEmail('');
-    setPassword('');
+
   };
 
   return (
