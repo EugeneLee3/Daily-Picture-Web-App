@@ -1,23 +1,16 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const uri = process.env.MONGODB_URI;
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB\n'))
-  .catch((err) => console.error('Failed to connect to MongoDB\n', err));
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.error('Failed to connect to MongoDB', err);
+  });
 
-const userSchema = new mongoose.Schema({
-    email: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    }
-})
+const userSchema = require('./schemas/Users');
 
-const collection = mongoose.model("Users", userSchema)
-
-module.exports = collection 
+module.exports = {userSchema};
