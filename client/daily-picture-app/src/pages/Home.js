@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import DailyImage from '../components/DailyImage';
 
 function Home() {
 
@@ -9,7 +10,7 @@ function Home() {
   return (
     <div>
         
-        hihi
+        <DailyImage />
 
     </div>
   )
