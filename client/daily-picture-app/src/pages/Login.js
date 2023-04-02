@@ -19,18 +19,19 @@ function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      await axios.post('/sign-in', { email, password })
       // When making a request to a protected route, include the JWT in the Authorization header
-      axios.get('/', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      });
+      // axios.get('/', {
+      //   headers: {
+      //     Authorization: `Bearer ${localStorage.getItem('token')}`
+      //   }
+      // });
       setError('');
       navigate('/');
     } catch (error) {
       console.log(error.response.data.message)
       setError(error.response.data.message);
-      navigate('/login'); // redirect to login page
+      navigate('/sign-in'); // redirect to login page
     }
   };
 
