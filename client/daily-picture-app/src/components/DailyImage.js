@@ -6,6 +6,7 @@ const NASA_API_KEY = process.env.REACT_APP_NASA_API_KEY;
 function DailyImage() {
   const [picture, setPicture] = useState(null);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+  const [error, setError] = useState('');
   const todayDate = moment().format('YYYY-MM-DD');
 
   useEffect(() => {
@@ -21,14 +22,16 @@ function DailyImage() {
 
   const handlePrevDay = () => {
     setDate(moment(date).subtract(1, 'days').format('YYYY-MM-DD'));
+    setError(false);
   };
 
   const handleNextDay = () => {
     if ( moment(date).add(1, 'days').format('YYYY-MM-DD') === moment(todayDate).add(1, 'days').format('YYYY-MM-DD') ) {
         setDate(todayDate);
-        console.log('Sorry, we cannot go into the future!');
+        setError(true);
     } else {
         setDate(moment(date).add(1, 'days').format('YYYY-MM-DD'));
+        setError(false);
     }
   };
 
@@ -43,6 +46,7 @@ function DailyImage() {
       <p>{picture.explanation}</p>
       <button onClick={handlePrevDay}>Previous Day</button>
       <button onClick={handleNextDay}>Next Day</button>
+      {error && <p>Sorry our technology currently prevents us from going into the future!</p>}
     </div>
   );
 }

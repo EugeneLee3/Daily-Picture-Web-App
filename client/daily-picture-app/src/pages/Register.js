@@ -23,7 +23,7 @@ function Register() {
     try {
       await axios.post('/register', { email, password });
       setError('');
-      //navigate('/sign-in');
+      navigate('/sign-in');
     } catch (error) {
       setError(error.response.data.message); // set error state to the error message returned by the server
     }

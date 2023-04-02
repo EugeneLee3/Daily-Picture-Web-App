@@ -18,12 +18,19 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission here
     try {
-      await axios.get('/sign-in', {email, password});
-      
+      // When making a request to a protected route, include the JWT in the Authorization header
+      axios.get('/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      setError('');
+      navigate('/');
     } catch (error) {
-
+      console.log(error.response.data.message)
+      setError(error.response.data.message);
+      navigate('/login'); // redirect to login page
     }
   };
 
@@ -43,6 +50,9 @@ function Login() {
         <br />
         <button type="submit">Sign In</button>
       </form>
+
+      {error && <p>Error: {error}</p>}
+
     </div>
   );
 }
