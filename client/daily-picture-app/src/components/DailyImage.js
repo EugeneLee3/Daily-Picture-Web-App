@@ -6,6 +6,7 @@ const NASA_API_KEY = process.env.REACT_APP_NASA_API_KEY;
 function DailyImage() {
   const [picture, setPicture] = useState(null);
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+  const todayDate = moment().format('YYYY-MM-DD');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +24,12 @@ function DailyImage() {
   };
 
   const handleNextDay = () => {
-    setDate(moment(date).add(1, 'days').format('YYYY-MM-DD'));
+    if ( moment(date).add(1, 'days').format('YYYY-MM-DD') === moment(todayDate).add(1, 'days').format('YYYY-MM-DD') ) {
+        setDate(todayDate);
+        console.log('Sorry, we cannot go into the future!');
+    } else {
+        setDate(moment(date).add(1, 'days').format('YYYY-MM-DD'));
+    }
   };
 
   if (!picture) {

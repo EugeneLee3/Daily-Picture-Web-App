@@ -1,9 +1,12 @@
 import { React, useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -13,12 +16,15 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission here
-    console.log(email)
-    console.log(password)
+    try {
+      await axios.get('/sign-in', {email, password});
+      
+    } catch (error) {
 
+    }
   };
 
   return (

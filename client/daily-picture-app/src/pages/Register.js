@@ -1,10 +1,13 @@
 import { React, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -16,15 +19,13 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission herez
-    console.log(email, password)
+    // Handle form submission here
     try {
-      const response = await axios.post('http://localhost:5000/register', { email, password });
-      console.log(response.data);
-      // do something based on the response
+      await axios.post('/register', { email, password });
+      setError('');
+      //navigate('/sign-in');
     } catch (error) {
-      console.error(error);
-      // handle error
+      setError(error.response.data.message); // set error state to the error message returned by the server
     }
   };
 
@@ -45,6 +46,9 @@ function Register() {
         <br />
         <button type="submit">Register</button>
       </form>
+      
+      {error && <p>Error: {error}</p>}
+
     </div>
   );
 }
