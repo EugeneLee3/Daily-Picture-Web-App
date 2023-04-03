@@ -34,29 +34,17 @@ function Login() {
     }
   };
 
-  // const responseGoogle = (response) => {
-  //   console.log(response);
-  //   const id_token = response.tokenId;
-  //   axios.post('/google-signin', { id_token })
-  //     .then(response => {
-  //       localStorage.setItem('token', response.data.token);
-  //       navigate('/');
-  //     })
-  //     .catch(error => {
-  //       console.log(error.response.data.message)
-  //       setError(error.response.data.message);
-  //     });
-  // }
-
   const onSuccess = (response) => {
     console.log(response.profileObj);
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('token', response.tokenId);
     setError('');
     navigate('/');
   };
+  
 
   const onFailure = (response) => {
-    setError('Failed authentication, please try a different login method.');
+    console.log("HI")
+    setError(response.error);
   };
 
   return (
@@ -84,11 +72,11 @@ function Login() {
           </Button>
 
           <GoogleLogin
-            clientId = "187092368092-rdfrckghkrjst0bdn01rq4lhc76409og.apps.googleusercontent.com"
-            onSuccess = { onSuccess }
-            onFailure = { onFailure }
-            cookiePolicy = { 'single_host_origin' }
-          />   
+            clientId={ process.env.REACT_APP_GOOGLE_CLIENT_ID }
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'single_host_origin'}
+          />
           
         </Form>     
     </>

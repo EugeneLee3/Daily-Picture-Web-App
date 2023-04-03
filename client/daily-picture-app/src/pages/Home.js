@@ -28,7 +28,6 @@ function Home() {
     <div>
       {localStorage.getItem('token') ? (
           <>
-            {/* <h1>Hello, {user}!</h1> */}
 
             <DailyImage />
 
