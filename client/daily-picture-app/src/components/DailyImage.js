@@ -1,8 +1,9 @@
 import { React, useState, useEffect } from 'react';
 import moment from 'moment';
 
-const NASA_API_KEY = '0McHb519Z8kSHR3fBHgy6KdShQ7luWqu3x9zQit2';
-// process.env.REACT_APP_NASA_API_KEY;
+import '../styles/dailyImage.css';
+
+const NASA_API_KEY = process.env.REACT_APP_NASA_API_KEY;
 
 function DailyImage() {
   const [picture, setPicture] = useState(null);
@@ -41,14 +42,14 @@ function DailyImage() {
   }
 
   return (
-    <div>
-      <h1>{picture.title}</h1>
+    <>
+      <h1 className=''>{picture.title}</h1>
       <img src={picture.url} alt={picture.title} />
       <p>{picture.explanation}</p>
       <button onClick={handlePrevDay}>Previous Day</button>
       <button onClick={handleNextDay}>Next Day</button>
       {error && <p>Sorry our technology currently prevents us from going into the future!</p>}
-    </div>
+    </>
   );
 }
 

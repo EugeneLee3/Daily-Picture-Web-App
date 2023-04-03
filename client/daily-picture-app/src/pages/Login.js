@@ -2,6 +2,10 @@ import { React, useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 import axios from 'axios';
 
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import '../styles/login.css';
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,22 +35,27 @@ function Login() {
 
   return (
       <>
-        <h1>Sign In</h1>
-        <form onSubmit={handleLogin}>
-          <label>
-            Email:
-            <input type="email" value={email} onChange={handleEmailChange} />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" value={password} onChange={handlePasswordChange} />
-          </label>
-          <br />
-          <button type="submit">Sign In</button>
-        </form>
+        <h1 className='title'>Sign In</h1>
 
-        {error && <p>Error: {error}</p>}
+        <Form className='form' onSubmit={handleLogin}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" value={password} onChange={handlePasswordChange} />
+          </Form.Group>
+
+          <Form.Text className="text-muted">
+            {error && <p>Error: {error}</p>}
+          </Form.Text>
+
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>        
 
     </>
   );

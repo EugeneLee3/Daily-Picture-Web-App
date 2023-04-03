@@ -1,13 +1,13 @@
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 
-import Navbar from '../components/Navbar'
+import NavigationBar from '../components/NavigationBar'
 
 function LayoutLoader() {
   return (
     <div>
         
-        <Navbar />
+        <NavigationBar />
 
         <Outlet />
 

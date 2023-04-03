@@ -3,14 +3,12 @@ const schemas = require("../mongo");
 const User = schemas.userSchema;
 
 const authMiddleware = async (req, res, next) => {
-    console.log(req.headers)
   try {
     // Get token from headers
     const token = req.headers.authorization.split(' ')[1];
 
     // Verify token
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    console.log(decodedToken)
 
     // Find user in database by decoded token
     const user = await User.findById(decodedToken.userId);
