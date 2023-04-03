@@ -1,6 +1,7 @@
-import { React, useState } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { GoogleLogin } from 'react-google-login';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -33,11 +34,26 @@ function Login() {
     }
   };
 
+  const responseGoogle = (response) => {
+    console.log(response);
+    const id_token = response.tokenId;
+    axios.post('/google-signin', { id_token })
+      .then(response => {
+        localStorage.setItem('token', response.data.token);
+        navigate('/');
+      })
+      .catch(error => {
+        console.log(error.response.data.message)
+        setError(error.response.data.message);
+      });
+  }
+
   return (
       <>
         <h1 className='title'>Sign In</h1>
 
         <Form className='form' onSubmit={handleLogin}>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
@@ -55,10 +71,17 @@ function Login() {
           <Button variant="primary" type="submit">
             Submit
           </Button>
-        </Form>        
 
+          <GoogleLogin
+            clientId = { process.env.REACT_APP_GOOGLE_CLIENT_ID }
+            onSuccess = { responseGoogle }
+            onFailure = { responseGoogle }
+            cookiePolicy = { 'single_host_origin' }
+          />   
+          
+        </Form>     
     </>
   );
 }
 
-export default Login
+export default Login;

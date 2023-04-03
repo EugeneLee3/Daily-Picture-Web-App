@@ -34,21 +34,20 @@ function Home() {
 
           </>
         ) : (
-          <>
-            <>
-              <h1 className=''>Hello!</h1>
-              <h3 className=''>Enjoy Your Daily Pictures of Space.</h3>
-              <h5 className=''>To Continue Please Log In or Register.</h5>
+          <div className='banner'>
+            <span className='content'>
+              <h1 className='title'>Hello!</h1>
+              <h3 className='subtitle'>Enjoy Your Daily Pictures of Space.</h3>
 
-              <button>
+              <button className='button'>
                 <Link to='/sign-in'>Sign In</Link>
               </button>
 
-              <button>
+              <button className='button'>
                 <Link to='/register'>Register</Link>
               </button>
-            </>
-          </>
+            </span>
+          </div>
         )}
     </div>
   );
