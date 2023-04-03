@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { GoogleLogin } from 'react-google-login';
+// import { GoogleLogin } from 'react-google-login';
 
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -34,18 +34,18 @@ function Login() {
     }
   };
 
-  const onSuccess = (response) => {
-    console.log(response.profileObj);
-    localStorage.setItem('token', response.tokenId);
-    setError('');
-    navigate('/');
-  };
+  // const onSuccess = (response) => {
+  //   console.log(response.profileObj);
+  //   localStorage.setItem('token', response.tokenId);
+  //   setError('');
+  //   navigate('/');
+  // };
   
 
-  const onFailure = (response) => {
-    console.log("HI")
-    setError(response.error);
-  };
+  // const onFailure = (response) => {
+  //   console.log("HI")
+  //   setError(response.error);
+  // };
 
   return (
       <>
@@ -71,12 +71,12 @@ function Login() {
             Submit
           </Button>
 
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId={ process.env.REACT_APP_GOOGLE_CLIENT_ID }
             onSuccess={onSuccess}
             onFailure={onFailure}
             cookiePolicy={'single_host_origin'}
-          />
+          /> */}
           
         </Form>     
     </>

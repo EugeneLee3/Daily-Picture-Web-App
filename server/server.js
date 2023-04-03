@@ -18,7 +18,7 @@ app.use(cors());
 app.use(loginRoutes(express, cors));
 app.use(registerRoutes(express, cors));
 app.use(homeRoutes(express, cors));
-app.use(googleRoutes(express, cors))
+// app.use(googleRoutes(express, cors))
 
 // Port
 const port = process.env.PORT;
