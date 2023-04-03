@@ -6,8 +6,7 @@ const dotenv = require("dotenv").config();
 //
 const { loginRoutes } = require('./routes/loginRoutes');
 const { registerRoutes } = require('./routes/registerRoutes');
-const { signOutRoutes } = require('./routes/signoutRoutes');
-const { protectedRoutes } = require('./routes/protectedRoutes');
+const { homeRoutes } = require("./routes/homeRoutes");
 
 //
 const app = express();
@@ -17,8 +16,7 @@ app.use(cors());
 //
 app.use(loginRoutes(express, cors));
 app.use(registerRoutes(express, cors));
-app.use(signOutRoutes(express, cors));
-app.use(protectedRoutes(express, cors));
+app.use(homeRoutes(express, cors));
 
 // Port
 const port = process.env.PORT;

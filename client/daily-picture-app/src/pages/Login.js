@@ -16,45 +16,39 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = async (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('/sign-in', { email, password })
-      // When making a request to a protected route, include the JWT in the Authorization header
-      // axios.get('/', {
-      //   headers: {
-      //     Authorization: `Bearer ${localStorage.getItem('token')}`
-      //   }
-      // });
+      const response = await axios.post('/sign-in', { email, password })
+      localStorage.setItem('token', response.data.token);
       setError('');
       navigate('/');
     } catch (error) {
       console.log(error.response.data.message)
       setError(error.response.data.message);
-      navigate('/sign-in'); // redirect to login page
     }
   };
 
   return (
-    <div>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={handleEmailChange} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </label>
-        <br />
-        <button type="submit">Sign In</button>
-      </form>
+      <>
+        <h1>Sign In</h1>
+        <form onSubmit={handleLogin}>
+          <label>
+            Email:
+            <input type="email" value={email} onChange={handleEmailChange} />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" value={password} onChange={handlePasswordChange} />
+          </label>
+          <br />
+          <button type="submit">Sign In</button>
+        </form>
 
-      {error && <p>Error: {error}</p>}
+        {error && <p>Error: {error}</p>}
 
-    </div>
+    </>
   );
 }
 

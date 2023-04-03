@@ -1,19 +1,41 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import DailyImage from '../components/DailyImage';
 
-function Home() {
 
-  // const location = useLocation();
+function Home() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get('/users',{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        setUser(response.data.user);
+      } catch (error) {
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <div>
-        
-        <DailyImage />
-
+      {localStorage.getItem('token') ? (
+          <>
+            {/* <h1>Hello, {user}!</h1> */}
+            <DailyImage />
+          </>
+        ) : (
+          <>
+            <div>sign in!</div>
+          </>
+        )}
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;

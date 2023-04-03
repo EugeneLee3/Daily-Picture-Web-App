@@ -5,7 +5,6 @@ const loginRoutes = (express, cors) => {
 
     const { comparePassword } = require('../utils/password');
     const { validateEmail } = require('../utils/validateEmail');
-    const { verifyToken } = require('../utils/auth')
 
     // Schemas
     const schemas = require("../mongo");
@@ -27,13 +26,6 @@ const loginRoutes = (express, cors) => {
       
             if (match) {
               res.status(200).send({ message: 'Log in successful' });
-              // Create a JWT token with a payload containing the user ID and expiration date
-              const token = jwt.sign({ id: existingUser[0]._id }, 'secret', { expiresIn: '1h' });
-
-              // Send the token back to the client
-              res.json({ token });
-              // When the user logs in and receives a token, store the token in local storage or cookies
-              localStorage.setItem('token', token);
             } else {
               res.status(401).send({ message: 'Incorrect email or password' });
             }
@@ -43,17 +35,6 @@ const loginRoutes = (express, cors) => {
         }
       });
 
-
-      // determining if user is logged in
-      // Route that requires authentication
-      router.get('/', verifyToken, (req, res) => {
-        try {
-          // The user is authenticated, so return some protected data
-          res.json({ message: 'You are authenticated' });
-        } catch(error) {
-          res.send('/login');
-        }
-      });
 
     return router;
 };

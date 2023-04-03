@@ -1,59 +1,46 @@
-import { React, useState } from 'react'
+import { React } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 
 import '../styles/navbar.css'
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  function handleLogout() {
-    // send a request to your backend to log the user out
-    // set isLoggedIn state to false
-    setIsLoggedIn(false);
-  };
-
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    // Handle form submission here
+    try {
+      navigate('/sign-in');
+    } catch (error) {
+      console.log(error.response.data.message)
+    }
+  };
 
-    //make request to backend to see if user is logged in
+  const handleLogout = () => {
     navigate('/sign-in');
-    await axios.get('/sign-in').then(response => {
-      if (response.data.authenticated) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    })
-    .catch(error => {
-      console.error("HI");
-    });
+    localStorage.removeItem('token');
   };
 
 
   return (
-    <div>
-      
+    <>
       <nav className="navbar horizontal">
 
-        <Link to="/">Home</Link>
-
-        {isLoggedIn ? (
-          <button onClick={handleLogout}>Sign out</button>
+        {localStorage.getItem('token') ? (
+          <>
+            <Link to="/">Home</Link>
+            <Link to="sign-in" onClick={handleLogout}>Logout</Link>
+          </>
         ) : (
-          <Link to="/sign-in" onClick={handleLogin}>Log in</Link>
+          <>
+            <Link to="/">Home</Link>
+            <Link to="/sign-in" onClick={handleLogin}>Log in</Link>
+            <Link to="/register">Sign Up</Link>
+          </>
         )}
 
-        <Link to="/register">Sign Up</Link>
-
       </nav>
-
-    </div>
-    
+    </>
   )
 }
 
