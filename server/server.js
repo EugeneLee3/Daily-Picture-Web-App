@@ -7,7 +7,7 @@ const dotenv = require("dotenv").config();
 const { loginRoutes } = require('./routes/loginRoutes');
 const { registerRoutes } = require('./routes/registerRoutes');
 const { homeRoutes } = require("./routes/homeRoutes");
-const { googleRoutes } = require("./routes/googleRoutes");
+//const { googleRoutes } = require("./routes/googleRoutes");
 
 //
 const app = express();

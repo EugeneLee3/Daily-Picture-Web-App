@@ -9,5 +9,9 @@
     "mongoose": "^7.0.3",
     "nodemon": "^2.0.22",
     "validator": "^13.9.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+ }
+ 
 }
