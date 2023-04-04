@@ -29,6 +29,8 @@ function Login() {
       setError('');
       navigate('/');
     } catch (error) {
+      console.log(email)
+      console.log("cant make axios.post request")
       console.log(error.response.data.message)
       setError(error.response.data.message);
     }

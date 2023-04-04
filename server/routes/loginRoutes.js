@@ -11,6 +11,7 @@ const loginRoutes = (express, cors) => {
 
     // validate email does not quite work atm
     router.post('/sign-in', cors(), async (req, res) => {
+        console.log('wow')
         if (req.body.email.trim().length === 0 || req.body.password.trim().length === 0) {
           res.status(400).send({ message: 'Please fill all required fields' });
         } 

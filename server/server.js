@@ -23,6 +23,7 @@ app.use(homeRoutes(express, cors));
 
 const startServer = async () => {
   try {
+    console.log('server started')
     const uri = process.env.MONGODB_URI;
     connectDB(uri);
 
