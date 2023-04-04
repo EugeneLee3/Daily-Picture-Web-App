@@ -24,7 +24,7 @@ function Login() {
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('/sign-in', { email, password })
+      const response = await axios.post('https://daily-picture-web-app.vercel.app/sign-in', { email, password })
       localStorage.setItem('token', response.data.token);
       setError('');
       navigate('/');

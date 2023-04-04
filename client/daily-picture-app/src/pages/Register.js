@@ -26,7 +26,7 @@ function Register() {
     event.preventDefault();
     // Handle form submission here
     try {
-      await axios.post('/register', { email, password });
+      await axios.post('https://daily-picture-web-app.vercel.app/register', { email, password });
       setError('');
       navigate('/sign-in');
     } catch (error) {
