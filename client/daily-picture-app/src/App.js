@@ -6,6 +6,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import LayoutLoader from './layouts/LayoutLoader';
 
+// Vercel Analytics
+import { inject } from '@vercel/analytics';
+inject ();
+
 function App() {
   return (
     <div>
