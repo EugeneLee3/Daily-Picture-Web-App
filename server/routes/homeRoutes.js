@@ -3,8 +3,7 @@ const homeRoutes = (express, cors) => {
     const authMiddleware = require('../middlewares/authMiddleware');
 
     // Schemas
-    const schemas = require("../mongo");
-    const User = schemas.userSchema;
+    const User = require('../mongodb/schemas/Users');
 
     router.get('/users', cors(), authMiddleware, async (req, res) => {
         // Use req.user to access the authenticated user

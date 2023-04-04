@@ -7,8 +7,7 @@ const loginRoutes = (express, cors) => {
     const { validateEmail } = require('../utils/validateEmail');
 
     // Schemas
-    const schemas = require("../mongo");
-    const User = schemas.userSchema;
+    const User = require('../mongodb/schemas/Users');
 
     // validate email does not quite work atm
     router.post('/sign-in', cors(), async (req, res) => {

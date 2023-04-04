@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const schemas = require("../mongo");
+const schemas = require("../mongodb/mongo");
 const User = schemas.userSchema;
 
 const authMiddleware = async (req, res, next) => {

@@ -5,8 +5,7 @@ const registerRoutes = (express, cors) => {
     const { validateEmail } = require('../utils/validateEmail');
 
     // Schemas
-    const schemas = require("../mongo");
-    const User = schemas.userSchema;
+    const User = require('../mongodb/schemas/Users');
 
     // All Requests for the register page
     router.post('/register', cors(), async (req, res) => {

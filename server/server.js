@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
+const connectDB = require('./mongodb/mongo');
 
 //
 const { loginRoutes } = require('./routes/loginRoutes');
@@ -20,25 +21,21 @@ app.use(registerRoutes(express, cors));
 app.use(homeRoutes(express, cors));
 // app.use(googleRoutes(express, cors))
 
-// Your code
-if (process.env.NODE_ENV === "production") {
-  const path = require("path");
-  app.use(express.static(path.resolve(__dirname, 'client', 'build')));
-  app.get("*", (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'),function (err) {
-          if(err) {
-              res.status(500).send(err)
-          }
-      });
-  })
-}
-// Your code
+const startServer = async () => {
+  try {
+    const uri = process.env.MONGODB_URI;
+    connectDB(uri);
 
+    // Port
+    const port = process.env.PORT;
 
-// // Port
-// const port = process.env.PORT;
+    //
+    app.listen(port, () => {
+      console.log(`Listening on Port ${port}`);
+});
+  } catch (error) {
+      console.log(error);
+  }
+};
 
-// //
-// app.listen(port, () => {
-//   console.log(`Listening on Port ${port}`);
-// });
+startServer();
